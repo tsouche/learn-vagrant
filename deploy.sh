@@ -99,7 +99,6 @@ echo "..."
 admin_profile=$(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 dashboard_token_full=$(kubectl -n kubernetes-dashboard describe secret $admin_profile | grep "token: ")
 dashboard_token=${dashboard_token_full#"token: "}
-echo $dashboard_token
 touch "${dashboard_token_path}"
 echo $dashboard_token > "${dashboard_token_path}"
 
@@ -134,7 +133,7 @@ echo "..."
 
 xdg-open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
-echo "Reminder: here is the token needed to log into the dashboard:"
+echo "Here is the token needed to log into the dashboard:"
 cat "${dashboard_token_path}"
 
 echo "..."
